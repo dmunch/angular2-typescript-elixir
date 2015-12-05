@@ -1,0 +1,7 @@
+<h1>Users</h1><a>New user</a>
+<ul *ng-for="#user of users">
+	<li>
+		{{user.name}}
+		<a (click)="deleteUser(user)">Delete</a>
+	</li>
+</ul>

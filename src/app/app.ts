@@ -1,9 +1,15 @@
-import {bootstrap, Component} from 'angular2/angular2';
+import {bootstrap, Component, Provider} from 'angular2/angular2';
+
+import {UserListComponent} from './components/user-list/user-list';
+import {User, UserService} from './services/UserService';
+import {MockUserService} from './mocks/MockUserService';
 
 @Component({
     selector: 'my-app',
-        template: '<h1>My First Angular 2 App</h1>'
-        })
-class AppComponent { }
-        
-bootstrap(AppComponent);
+    template: '<user-list></user-list>',
+    directives: [UserListComponent]
+})
+
+class AppComponent {}
+
+bootstrap(AppComponent, [UserService, new Provider(UserService, {useClass: MockUserService})]);
