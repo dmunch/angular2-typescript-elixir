@@ -4,6 +4,7 @@ import {RouteConfig, ROUTER_BINDINGS, ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Locat
 import {UserListComponent} from './components/user-list/user-list';
 import {NewUserComponent} from './components/new-user/new-user';
 import {EditUserComponent} from './components/edit-user/edit-user';
+import {DeleteUserComponent} from './components/delete-user/delete-user';
 
 import {User, UserService} from './services/UserService';
 import {MockUserService} from './mocks/MockUserService';
@@ -18,6 +19,7 @@ import {MockUserService} from './mocks/MockUserService';
   { path: '/', component: UserListComponent, name: 'Home' },
   { path: '/new', component: NewUserComponent, name: 'New' },
   { path: '/edit/:id', component: EditUserComponent, name: 'Edit' }
+  { path: '/delete/:id', component: DeleteUserComponent, name: 'Delete' }
 ])
 
 class AppComponent {}

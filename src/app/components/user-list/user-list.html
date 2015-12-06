@@ -3,7 +3,7 @@
 <ul *ng-for="#user of users">
 	<li>
 		{{user.name}}
-		<a (click)="deleteUser(user)">Delete</a>
+		<a [router-link]="['/Delete',{'id': user.id}]">Delete</a>
 		<a [router-link]="['/Edit',{'id': user.id}]">Edit</a>
 	</li>
 </ul>
