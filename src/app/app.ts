@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_BINDINGS, ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Locat
 
 import {UserListComponent} from './components/user-list/user-list';
 import {NewUserComponent} from './components/new-user/new-user';
+import {EditUserComponent} from './components/edit-user/edit-user';
 
 import {User, UserService} from './services/UserService';
 import {MockUserService} from './mocks/MockUserService';
@@ -15,11 +16,11 @@ import {MockUserService} from './mocks/MockUserService';
 
 @RouteConfig([
   { path: '/', component: UserListComponent, name: 'Home' },
-  { path: '/new', component: NewUserComponent, name: 'New' }
+  { path: '/new', component: NewUserComponent, name: 'New' },
+  { path: '/edit/:id', component: EditUserComponent, name: 'Edit' }
 ])
 
 class AppComponent {}
-
 
 bootstrap(AppComponent, [UserService,
                         ROUTER_PROVIDERS,

@@ -2,9 +2,9 @@ import {User, UserService} from '../services/UserService';
 
 export class MockUserService implements UserService{
     private _users : User[] = [ 
-            { "id": 11, "name": "Elviro" },
-            { "id": 12, "name": "Daniel" },
-            { "id": 13, "name": "Philipp" },
+            { "id": 1, "name": "Elviro" },
+            { "id": 2, "name": "Daniel" },
+            { "id": 3, "name": "Philipp" },
         ];
     
     get() : User[] {
@@ -12,8 +12,20 @@ export class MockUserService implements UserService{
         return this._users.slice(); 
     }
     
+    getById(id: number) : User {
+        return this._users.find(user => user.id == id);
+    }
+    
     upsert(user: User) {
-        this._users.push(user);
+        if(user.id != null){
+            //update case
+            let repoUser = this.getById(user.id);
+            repoUser.name = user.name;
+        } 
+        else {
+            //insert case
+            this._users.push(user);    
+        } 
     }
     
     delete(user: User) {

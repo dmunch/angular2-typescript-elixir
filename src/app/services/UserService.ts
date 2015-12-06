@@ -9,6 +9,7 @@ export class User {
 @Injectable()
 export abstract class UserService{    
     abstract get() : User[];
+    abstract getById(id: number) : User;
     abstract upsert(user: User);
     abstract delete(user: User);
 }
