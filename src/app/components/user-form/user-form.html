@@ -1,0 +1,20 @@
+<form [ng-form-model]="userForm" (submit)="submit($event)">
+    <div>
+        <label for="name">Name:</label>
+        <input id="name" ng-control="name" type="text" placeholder="Name">
+    </div>
+    
+    <div>
+        <label for="email">E-Mail:</label>
+        <input id="email" ng-control="email" type="email" placeholder="E-Mail">
+    </div>
+    
+    <div>
+        <label for="description">Description:</label>
+        <input id="description" ng-control="description" type="text" placeholder="Description">
+    </div>
+    
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

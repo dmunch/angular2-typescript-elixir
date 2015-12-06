@@ -8,7 +8,8 @@ export class MockUserService implements UserService{
         ];
     
     get() : User[] {
-        return this._users; 
+        //copy array 
+        return this._users.slice(); 
     }
     
     upsert(user: User) {
