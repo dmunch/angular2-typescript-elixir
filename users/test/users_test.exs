@@ -1,8 +1,12 @@
-defmodule UsersTest do
+defmodule APITest do
   use ExUnit.Case
-  doctest Users
+  use Maru.Router
+  use Maru.Test, for: Users.Api
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  @store Application.get_env(:users, :users_store)
+
+  test "/users" do
+    resp_body = conn(:get, "/users") |> make_response |> (fn r -> r.resp_body end).()
+    assert @store.get |> Poison.encode! == resp_body 
   end
 end

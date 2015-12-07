@@ -28,6 +28,6 @@ defmodule Users.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:maru, "~> 0.2.8"}]
+    [{:maru, "~> 0.9"}]
   end
 end
