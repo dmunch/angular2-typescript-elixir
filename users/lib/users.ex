@@ -7,13 +7,18 @@ defmodule Users do
     import Supervisor.Spec, warn: false
 
     children = [
-      # Define workers and child supervisors to be supervised
-      # worker(Users.Worker, [arg1, arg2, arg3]),
+      worker(Users.AgentWorker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Users.Supervisor]
-    Supervisor.start_link(children, opts)
+    svReturn = Supervisor.start_link(children, opts)
+
+    #Setup some test data
+    Users.AgentWorker.insert(%{name: "Daniel", email: "xxxx@gmail.com", description: "Developer"})
+    
+    #start expects us to return this value
+    svReturn
   end
 end
