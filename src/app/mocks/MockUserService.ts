@@ -7,31 +7,41 @@ export class MockUserService implements UserService{
             { "id": 3, "name": "Philipp" },
         ];
     
-    get() : User[] {
+    get() : Promise<User[]> {
         //copy array 
-        return this._users.slice(); 
+        return new Promise(r => r(this._users.slice()));
     }
     
-    getById(id: number) : User {
-        return this._users.find(user => user.id == id);
+    getById(id: number) : Promise<User> {
+        return new Promise(r => r(this._users.find(user => user.id == id)));
     }
     
-    upsert(user: User) {
-        if(user.id != null){
-            //update case
-            let repoUser = this.getById(user.id);
-            repoUser.name = user.name;
-        } 
-        else {
-            //insert case
-            this._users.push(user);    
-        } 
+    upsert(user: User) : Promise<void> {
+        return new Promise<void>(resolve => {
+            if(user.id != null){
+                //update case
+                let repoUser = this._users.find(user => user.id == user.id);
+                repoUser.name = user.name;
+            } 
+            else {
+                //insert case
+                this._users.push(user);    
+            }
+            resolve();
+        }); 
     }
     
-    delete(user: User) {
-      var index = this._users.indexOf(user, 0);
-      if (index != undefined) {
-        this._users.splice(index, 1);
-      }
+    delete(user: User) : Promise<void> {
+        return new Promise<void>((resolve, error) => {
+            if(user.id == 2) {
+                error("mean user");
+            }
+            
+            var index = this._users.indexOf(user, 0);
+            if (index != undefined) {
+                this._users.splice(index, 1);
+            }
+            resolve();
+        });
     }
 }
