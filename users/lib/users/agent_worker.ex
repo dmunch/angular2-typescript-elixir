@@ -29,4 +29,8 @@ defmodule Users.AgentWorker do
   defp get_id_value do
     :crypto.rand_bytes(16) |> Base.encode16 |> String.downcase
   end
+
+  def clear do 
+    Agent.update(@name, &Map.drop(&1, Map.keys(&1)))
+  end
 end
