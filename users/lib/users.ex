@@ -1,3 +1,8 @@
+defmodule User do
+  @derive [Poison.Encoder]
+  defstruct [:id, :name, :description, :email]
+end
+
 defmodule Users do
   use Application
 
@@ -16,7 +21,7 @@ defmodule Users do
     svReturn = Supervisor.start_link(children, opts)
 
     #Setup some test data
-    Users.AgentWorker.insert(%{name: "Daniel", email: "xxxx@gmail.com", description: "Developer"})
+    Users.AgentWorker.insert(%User{name: "Daniel", email: "xxxx@gmail.com", description: "Developer"})
     
     #start expects us to return this value
     svReturn

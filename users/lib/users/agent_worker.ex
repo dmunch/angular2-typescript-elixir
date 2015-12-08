@@ -7,11 +7,12 @@ defmodule Users.AgentWorker do
 
   def insert(params) do
     id = get_id_value
-    Agent.update(@name, &Map.put_new(&1, id, Map.merge(%{id: id}, params)))
+    Agent.update(@name, &Map.put_new(&1, id, %{params | id: id}))
+    id
   end
 
   def update(params) do
-    Agent.update(@name, &Map.put(&1, params[:id], params))
+    Agent.update(@name, &Map.put(&1, params.id, params))
   end
 
   def get do
