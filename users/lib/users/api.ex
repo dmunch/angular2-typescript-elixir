@@ -14,8 +14,8 @@ defmodule Users.Api do
       end
   end
 
-  rescue_from :all do
+  rescue_from :all, as: error do
     status 500
-    conn |> json %{message: "Server Error"}
+    conn |> json %{message: error}
   end
 end
