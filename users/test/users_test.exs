@@ -20,8 +20,8 @@ defmodule APITest do
     user1 = %User{name: "daniel", description: "developer"}
     user2 = %User{name: "hans", description: "user"}
 
-    user1 = %{user1 | id: @store.insert(user1)}
-    user2 = %{user2 | id: @store.insert(user2)}
+    user1 = @store.insert(user1)
+    user2 = @store.insert(user2)
  
     #sort the lists since by specs we don't care about the order
     assert [user1, user2] |> Enum.sort == "/users" |> (get_and_decode [User]) |> Enum.sort 
@@ -31,8 +31,8 @@ defmodule APITest do
     user1 = %User{name: "daniel", description: "developer"}
     user2 = %User{name: "hans", description: "user"}
 
-    user1 = %{user1 | id: @store.insert(user1)}
-    user2 = %{user2 | id: @store.insert(user2)}
+    user1 = @store.insert(user1)
+    user2 = @store.insert(user2)
     assert user1 == "/users/#{user1.id}" |> get_and_decode User
     assert user2 == "/users/#{user2.id}" |> get_and_decode User
 
