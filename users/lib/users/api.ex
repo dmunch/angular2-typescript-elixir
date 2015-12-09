@@ -15,6 +15,12 @@ defmodule Users.Api do
       desc "get a specific user"
         get do conn |> json @store.get params[:id]    
       end
+      desc "delete a specific user"
+        delete do 
+          conn
+          |> put_status(204) 
+          |> json @store.delete params[:id]    
+      end
       desc "update a specific user"
         params do 
           requires :name
@@ -45,6 +51,7 @@ defmodule Users.Api do
 
   rescue_from :all, as: error do
     status 500
+    IO.puts(error)
     conn |> json %{message: error}
   end
 end

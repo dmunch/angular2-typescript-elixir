@@ -81,4 +81,18 @@ defmodule APITest do
     assert updated_user === update_user.(updated_user)
     assert updated_user === @store.get(user.id)
   end
+  
+  test "delets an existing user by DELETE on /users/:id" do
+    user = %User{name: "daniel", description: "developer", email: "yyy@xxx.de"}
+    user = @store.insert(user)
+    
+    delete_user = fn user -> 
+      conn(:delete, "/users/#{user.id}") 
+      |> make_response
+    end
+
+    
+    assert 204 == delete_user.(user).status
+    assert nil == @store.get(user.id)
+  end
 end
