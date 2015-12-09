@@ -3,22 +3,17 @@ defmodule APITest do
   use Maru.Router
   use Maru.Test, for: Users.Api
 
-  import Curry
-
   @store Application.get_env(:users, :users_store)
 
   setup do
     @store.clear
   end
 
-  def get_and_decode_(type, url) do
+  def get_and_decode(url, type) do
     conn(:get, url) 
       |> make_response
       |> (fn r -> r.resp_body end).()
       |> (fn json -> Poison.decode!(json, as: type) end).()
-  end
-  def get_and_decode do
-    curry(&(get_and_decode_(&1, &2))) 
   end
 
   test "/users" do 
@@ -29,7 +24,7 @@ defmodule APITest do
     user2 = %{user2 | id: @store.insert(user2)}
  
     #sort the lists since by specs we don't care about the order
-    assert [user1, user2] |> Enum.sort == "/users" |> get_and_decode.([User]).() |> Enum.sort 
+    assert [user1, user2] |> Enum.sort == "/users" |> (get_and_decode [User]) |> Enum.sort 
   end
 
   test "/users/:id" do
@@ -38,8 +33,8 @@ defmodule APITest do
 
     user1 = %{user1 | id: @store.insert(user1)}
     user2 = %{user2 | id: @store.insert(user2)}
+    assert user1 == "/users/#{user1.id}" |> get_and_decode User
+    assert user2 == "/users/#{user2.id}" |> get_and_decode User
 
-    assert user1 == "/users/#{user1.id}" |> get_and_decode.(User).()
-    assert user2 == "/users/#{user2.id}" |> get_and_decode.(User).()
   end
 end
