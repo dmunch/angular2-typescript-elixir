@@ -15,6 +15,7 @@ defmodule Users.AgentWorker do
 
   def update(params) do
     Agent.update(@name, &Map.put(&1, params.id, params))
+    get(params.id)
   end
 
   def get do

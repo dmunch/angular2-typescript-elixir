@@ -64,4 +64,21 @@ defmodule APITest do
     new_user1_resp = post_new_user.(user1)
     assert 201 == new_user1_resp.status
   end
+  
+  test "updates an existing user by PUT on /users/:id" do
+    user = %User{name: "daniel", description: "developer", email: "yyy@xxx.de"}
+    user = @store.insert(user)
+    
+    update_user = fn user -> 
+      conn(:put, "/users/#{user.id}", user |> Poison.encode!) 
+      |> Plug.Conn.put_req_header("content-type", "application/json") 
+      |> make_response
+      |> (fn r -> r.resp_body end).()
+      |> (fn json -> Poison.decode!(json, as: User) end).()
+    end
+
+    updated_user = %{user | name: "sigfried"}
+    assert updated_user === update_user.(updated_user)
+    assert updated_user === @store.get(user.id)
+  end
 end
