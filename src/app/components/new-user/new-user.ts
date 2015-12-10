@@ -15,7 +15,7 @@ export class NewUserComponent {
   user: User;
   
   constructor(private service: UserService, private router: Router, private errorHandler: ErrorHandler) { 
-    this.user = new User(null, "");
+    this.user = new User(null, "", "", "");
   }
   
   addUser(user: User) {    

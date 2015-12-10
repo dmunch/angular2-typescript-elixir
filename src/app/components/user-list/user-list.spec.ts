@@ -21,8 +21,8 @@ describe('UserListComponent', () => {
 
   it('should have loaded the users from the service', done => {
     userService.get.and.returnValue(new Promise(r => r([
-      new User(1, "daniel"), 
-      new User(2, "philip")
+      new User("1", "daniel", "", ""), 
+      new User("2", "philip", "", "")
     ])));
     
     var component = new UserListComponent(<UserService> userService, <ErrorHandler> errorHandler);
@@ -31,8 +31,8 @@ describe('UserListComponent', () => {
     //could use https://www.npmjs.com/package/prophecy as an alternative
     setTimeout(() => {
       expect(component.users.length).toEqual(2);
-      expect(component.users[0]).toEqual(new User(1, "daniel"));
-      expect(component.users[1]).toEqual(new User(2, "philip"));
+      expect(component.users[0]).toEqual(new User("1", "daniel", "", ""));
+      expect(component.users[1]).toEqual(new User("2", "philip", "", ""));
       done();
     }, 0);
   });

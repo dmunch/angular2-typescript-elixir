@@ -17,7 +17,7 @@ describe('EditUserComponent', () => {
   
   it('should call upsert on repository when updating a user', done => {
     routeParams.get.and.returnValue("1");
-    userService.getById.and.returnValue(new Promise(r => r(new User(1, "test"))));
+    userService.getById.and.returnValue(new Promise(r => r(new User("1", "test", "", ""))));
     userService.upsert.and.returnValue(new Promise(r => r()));
     
     var component = new EditUserComponent(<UserService> userService, <Router> router, <RouteParams> routeParams, <ErrorHandler> errorHandler);
@@ -25,7 +25,7 @@ describe('EditUserComponent', () => {
     //need to use setTimeout in order to resolve promise
     //could use https://www.npmjs.com/package/prophecy as an alternative
     setTimeout(() => {
-      component.editUser(new User(10, "new user"));
+      component.editUser(new User("10", "new user", "", ""));
       expect(userService.upsert).toHaveBeenCalled();
       done();
     }, 0);    

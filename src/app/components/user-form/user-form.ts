@@ -1,11 +1,11 @@
-import {Component, FormBuilder, Validators, ControlGroup, Control, EventEmitter, Output, Input, OnInit} from 'angular2/angular2'
+import {Component, FormBuilder, Validators, ControlGroup, Control, EventEmitter, Output, Input, OnChanges} from 'angular2/angular2'
 import {User} from '../../services/UserService';
 
 @Component({
   selector: 'user-form',
   templateUrl: 'app/components/user-form/user-form.html'
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnChanges {
   @Input() user: User;
   @Output() submitted: EventEmitter<User> = new EventEmitter();
   
@@ -21,18 +21,19 @@ export class UserFormComponent implements OnInit {
       description: this.descriptionControl     
     });
   }
-  
-  ngOnInit() {
-    console.log(this.user);
+
+  ngOnChanges() {
+    if(this.user == null)
+      return;
+      
     this.userForm.value = this.user;
-    
     this.nameControl.updateValue(this.user.name);
+    this.descriptionControl.updateValue(this.user.description);
+    this.emailControl.updateValue(this.user.email);
   }
   
-  submit(event) {
-    console.log(this.userForm.value);    
+  submit(event) {    
     event.preventDefault();
-    console.log(this.user);
     this.submitted.emit(this.userForm.value);
   }
 }

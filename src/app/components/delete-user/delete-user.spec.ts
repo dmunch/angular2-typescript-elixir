@@ -17,7 +17,7 @@ describe('DeleteUserComponent', () => {
     
   it('should call delete on repository when deleting a user', () => {
     routeParams.get.and.returnValue("1");
-    userService.getById.and.returnValue(new Promise(r => r(new User(1, "test"))));
+    userService.getById.and.returnValue(new Promise(r => r(new User("1", "test", "", ""))));
     userService.delete.and.returnValue(new Promise(r => r()));
     
     var component = new DeleteUserComponent(<UserService> userService, <Router> router, <RouteParams> routeParams, <ErrorHandler> errorHandler);

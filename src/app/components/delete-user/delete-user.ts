@@ -10,10 +10,10 @@ import {ErrorHandler} from '../../services/ErrorHandler';
 })
 
 export class DeleteUserComponent {
-  user: User;
+  user: User = new User(null, null, null, null);
   
   constructor(private service: UserService, private router: Router, params: RouteParams, private errorHandler: ErrorHandler) {
-    var id = +params.get('id');
+    var id = params.get('id');
     
     service.getById(id)
       .then(user => this.user = user);

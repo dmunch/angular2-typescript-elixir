@@ -15,7 +15,7 @@ export class EditUserComponent {
   user: User;
   
   constructor(private service: UserService, private router: Router, params: RouteParams, private errorHandler: ErrorHandler) {
-    var id = +params.get('id');
+    var id = params.get('id');
     console.log(id);
     
     service.getById(id)

@@ -16,7 +16,7 @@ describe('NewUserComponent', () => {
     userService.upsert.and.returnValue(new Promise(r => r()));
     
     var component = new NewUserComponent(<UserService> userService, <Router> router, <ErrorHandler> errorHandler);
-    component.addUser(new User(10, "new user"));
+    component.addUser(new User("10", "new user", "", ""));
     
     expect(userService.upsert).toHaveBeenCalled();
   });

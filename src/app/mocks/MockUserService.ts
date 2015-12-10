@@ -2,9 +2,9 @@ import {User, UserService} from '../services/UserService';
 
 export class MockUserService implements UserService{
     private _users : User[] = [ 
-            { "id": 1, "name": "Elviro" },
-            { "id": 2, "name": "Daniel" },
-            { "id": 3, "name": "Philipp" },
+            { "id": "1", "name": "Elviro", "email": "", "description": "" },
+            { "id": "2", "name": "Daniel" , "email": "", "description": ""},
+            { "id": "3", "name": "Philipp" , "email": "", "description": ""},
         ];
     
     get() : Promise<User[]> {
@@ -12,7 +12,7 @@ export class MockUserService implements UserService{
         return new Promise(r => r(this._users.slice()));
     }
     
-    getById(id: number) : Promise<User> {
+    getById(id: string) : Promise<User> {
         return new Promise(r => r(this._users.find(user => user.id == id)));
     }
     
@@ -33,7 +33,7 @@ export class MockUserService implements UserService{
     
     delete(user: User) : Promise<void> {
         return new Promise<void>((resolve, error) => {
-            if(user.id == 2) {
+            if(user.id == "2") {
                 error("mean user");
             }
             

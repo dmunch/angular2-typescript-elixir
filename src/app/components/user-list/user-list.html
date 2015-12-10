@@ -1,9 +1,21 @@
 <h1>Users</h1>
 <a [router-link]="['/New']">New</a>
-<ul *ng-for="#user of users">
-	<li>
-		{{user.name}}
-		<a [router-link]="['/Delete',{'id': user.id}]">Delete</a>
-		<a [router-link]="['/Edit',{'id': user.id}]">Edit</a>
-	</li>
-</ul>
+<table *ng-for="#user of users">
+	<tr>
+		<td>
+			{{user.name}}
+		</td>
+		<td>
+			{{user.email}}
+		</td>
+		<td>
+			{{user.description}}
+		</td>
+		<td>
+			<a [router-link]="['/Edit',{'id': user.id}]">Edit</a>
+		</td>
+		<td>
+			<a [router-link]="['/Delete',{'id': user.id}]">Delete</a>
+		</td>
+	</tr>
+</table>
