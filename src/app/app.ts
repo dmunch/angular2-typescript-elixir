@@ -1,4 +1,5 @@
 import {bootstrap, Component, Provider} from 'angular2/angular2';
+import {HTTP_PROVIDERS} from 'angular2/http';
 import {RouteConfig, ROUTER_BINDINGS, ROUTER_PROVIDERS, ROUTER_DIRECTIVES, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 
 import {UserListComponent} from './components/user-list/user-list';
@@ -8,9 +9,10 @@ import {DeleteUserComponent} from './components/delete-user/delete-user';
 import {ErrorComponent} from './components/error/error';
 
 import {User, UserService} from './services/UserService';
+import {HttpUserService} from './services/HttpUserService';
 import {ErrorHandler, LocalStorageErrorHandler} from './services/ErrorHandler';
 import {MockUserService} from './mocks/MockUserService';
-
+import {HttpUserService} from './services/HttpUserService';
 
 @Component({
     selector: 'my-app',
@@ -30,6 +32,7 @@ class AppComponent {}
 
 bootstrap(AppComponent, [UserService,
                         ROUTER_PROVIDERS,
-                        new Provider(UserService, {useClass: MockUserService}),
+                        HTTP_PROVIDERS,
+                        new Provider(UserService, {useClass: HttpUserService}),
                         new Provider(ErrorHandler, {useClass: LocalStorageErrorHandler}),
                         new Provider(LocationStrategy, {useClass: HashLocationStrategy})]);
