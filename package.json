@@ -11,7 +11,7 @@
   "author": "Daniel Münch",
   "license": "ISC",
   "dependencies": {
-    "angular2": "^2.0.0-alpha.48",
+    "angular2": "^2.0.0-alpha.50",
     "systemjs": "^0.19.6"
   },
   "devDependencies": {

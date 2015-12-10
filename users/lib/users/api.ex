@@ -1,5 +1,8 @@
 defmodule Users.Api do  
   use Maru.Router
+  plug CORSPlug  
+
+
   @store Application.get_env(:users, :users_store)
 
   defp params_to_user(params) do
@@ -40,7 +43,6 @@ defmodule Users.Api do
       requires :name
       requires :description
       requires :email
-      optional :id 
     end
     post do
       conn 
@@ -51,7 +53,7 @@ defmodule Users.Api do
 
   rescue_from :all, as: error do
     status 500
-    IO.puts(error)
+    #IO.puts(error)
     conn |> json %{message: error}
   end
 end
