@@ -4,19 +4,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc -p src -w",
+    "tsc-watch": "tsc -p src -w",
+    "tsc": "tsc -p src",
     "start": "live-server --open=src"
   },
   "keywords": [],
   "author": "Daniel Münch",
   "license": "ISC",
   "dependencies": {
-    "angular2": "^2.0.0-alpha.50",
-    "systemjs": "^0.19.6"
+    "angular2": "2.0.0-alpha.50",
+    "systemjs": "0.19.6"
   },
   "devDependencies": {
-    "jasmine-core": "^2.4.1",
-    "live-server": "^0.8.2",
-    "typescript": "^1.7.3"
+    "jasmine-core": "2.4.1",
+    "live-server": "0.8.2",
+    "typescript": "1.7.3"
   }
 }
